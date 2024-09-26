@@ -11,14 +11,4 @@ namespace Gameplay
         [field: SerializeField] public Transform StartPoint { get; private set; }
         [field: SerializeField] public Transform EndPoint { get; private set; }
     }
-
-    public class Rope : MonoBehaviour
-    {
-        [SerializeField] RopeElement _ropePrefab;
-
-        private void Awake()
-        {
-            
-        }
-    }
 }
