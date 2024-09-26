@@ -7,21 +7,15 @@ namespace Gameplay
     [RequireComponent(typeof(FallingCharacterCollisionHandler))]
     public class FallingCharacter : MonoBehaviour
     {
-        private FallingCharacterMover characterMover;
-        private FallingCharacterCollisionHandler collisionHandler;
+        private FallingCharacterMover _characterMover;
+        private FallingCharacterCollisionHandler _collisionHandler;
+
+        public FallingCharacterMover CharacterMover => _characterMover;
 
         private void Awake()
         {
-            characterMover = GetComponent<FallingCharacterMover>(); 
-            collisionHandler = GetComponent<FallingCharacterCollisionHandler>();
-        }
-
-        private IEnumerator Start()
-        {
-            yield return new WaitForSeconds(2);
-
-            characterMover.Jump();
-            collisionHandler.Toggle(false);
+            _characterMover = GetComponent<FallingCharacterMover>(); 
+            _collisionHandler = GetComponent<FallingCharacterCollisionHandler>();
         }
     }
 }

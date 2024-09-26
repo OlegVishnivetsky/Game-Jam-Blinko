@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
@@ -5,16 +6,23 @@ namespace Gameplay
 {
     public class FallingCharacterMover : MonoBehaviour
     {
+        [Title("Movement")]
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _stepTime;
-        [SerializeField] private float _jumpForce;
+
+        [Title("Jumping")]
+        [MinMaxSlider(0f, 100f)]
+        [SerializeField] private Vector2 _jumpUpForce;
+        [MinMaxSlider(0f, 100f)]
+        [SerializeField] private Vector2 _jumpSideForce;
 
         [SerializeField] private Rigidbody2D _bodyRigidbody;
         [SerializeField] private Rigidbody2D _leftLegRigidbody;
         [SerializeField] private Rigidbody2D _rightLegRigidbody;
 
         private Animator _animator;
-        private bool _isMovingLeft;
+        private MoveDirection _moveDirection = MoveDirection.Right;
+        private bool _isJumped;
 
         private void Awake()
         {
@@ -23,7 +31,7 @@ namespace Gameplay
 
         public void Update()
         {
-            if (_isMovingLeft)
+            if (_moveDirection == MoveDirection.Left)
             {
                 StartCoroutine(MoveLeftRoutine());
             }
@@ -33,11 +41,11 @@ namespace Gameplay
             }
         }
 
-        public void Initialize(bool isMovingLeft)
+        public void Initialize(MoveDirection moveDirection)
         {
-            _isMovingLeft = isMovingLeft;
+            _moveDirection = moveDirection;
 
-            if (_isMovingLeft)
+            if (_moveDirection == MoveDirection.Left)
             {
                 _animator.Play("FallingCharacter_WalkLeft");
             }
@@ -49,7 +57,22 @@ namespace Gameplay
 
         public void Jump()
         {
-            _bodyRigidbody.AddForce(Vector2.up * _jumpForce, 
+            if (_isJumped)
+                return;
+
+            _isJumped = true;
+
+            float randomUpForce = Random.Range(_jumpUpForce.x, 
+                _jumpUpForce.y);
+            float randomSideForce = Random.Range(_jumpSideForce.x,
+                _jumpSideForce.y);
+
+            Vector2 sideForceDirection = _moveDirection == MoveDirection.Left
+                    ? Vector2.left : Vector2.right;
+
+            _bodyRigidbody.AddForce(Vector2.up * randomUpForce, 
+                ForceMode2D.Impulse);           
+            _bodyRigidbody.AddForce(sideForceDirection * randomSideForce,
                 ForceMode2D.Impulse);
         }
 
