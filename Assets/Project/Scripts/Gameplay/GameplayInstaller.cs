@@ -7,6 +7,7 @@ namespace Gameplay
     public class GameplayInstaller : MonoInstaller
     {
         [SerializeField] GameObject _sceneUIPrefab;
+        [SerializeField] private LevelInfo _levelInfo;
 
         private UIRootView _uiRoot;
 
@@ -18,7 +19,10 @@ namespace Gameplay
 
         public override void InstallBindings()
         {
-
+            Container
+                .BindInstance(_levelInfo)
+                .AsSingle()
+                .NonLazy();
 
             _uiRoot.AttachSceneUI(_sceneUIPrefab, Container);
         }
