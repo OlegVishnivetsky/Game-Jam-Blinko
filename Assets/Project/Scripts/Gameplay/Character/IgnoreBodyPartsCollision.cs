@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class IgnoreCollisionLimbs : MonoBehaviour
+    public class IgnoreBodyPartsCollision : MonoBehaviour
     {
         [SerializeField] private Collider2D[] _characterParts;
 
