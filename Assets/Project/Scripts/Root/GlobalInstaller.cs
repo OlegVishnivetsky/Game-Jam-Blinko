@@ -56,7 +56,7 @@ namespace Root
                 return;
             }
 #endif
-            _loader.LoadSceneAsync(Scenes.MAIN_MENU);
+            _loader.LoadSceneAsync(Scenes.GAMEPLAY);
         }
     }
 }
