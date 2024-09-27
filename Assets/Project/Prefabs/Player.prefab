@@ -2565,10 +2565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rope: {fileID: 7665891491550874181}
-  _trigger: {fileID: 0}
+  _rb: {fileID: 1279952995253245710}
   _speed: 5
-  _hit1PRefab: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
-  _hit2PRefab: {fileID: 5880797563141009103, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
 --- !u!114 &1014755805258419642
 MonoBehaviour:
   m_ObjectHideFlags: 0
