@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Root;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +16,9 @@ namespace Gameplay
 
         [Inject]
         private GameStateHandler _gameStateHandler;
+
+        [Inject]
+        private SceneLoader _sceneLoader;
 
         private Animator _animator;
         private Vector3 _direction;
@@ -66,6 +70,7 @@ namespace Gameplay
             if (_currentHealth - 1 <= 0)
             {
                 _gameStateHandler.ChangeState(GameState.Finish);
+                _sceneLoader.LoadSceneAsync("Gameplay");
             }
 
             _currentHealth--;
