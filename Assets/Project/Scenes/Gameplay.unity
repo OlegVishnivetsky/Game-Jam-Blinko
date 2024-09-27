@@ -4094,6 +4094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shakeFeedback: {fileID: 1495749244}
+  _fx: {fileID: 4021103657954561960, guid: cae6922d0487a6743957486752e39465, type: 3}
 --- !u!1 &1066963640
 GameObject:
   m_ObjectHideFlags: 0
@@ -7019,7 +7020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpdateMode: 0
-  PositionActive: 1
+  PositionActive: 0
   RotationActive: 0
   ScaleActive: 0
   PositionWiggleProperties:
