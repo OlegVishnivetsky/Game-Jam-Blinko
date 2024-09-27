@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using R3;
+using R3.Triggers;
+using Lean.Pool;
 
 namespace Gameplay
 {
@@ -6,8 +9,10 @@ namespace Gameplay
     public class PlayerView : MonoBehaviour
     {
         [SerializeField] Rope _rope;
-        [SerializeField] Rigidbody2D _rb;
+        [SerializeField] Collider2D _trigger;
         [SerializeField] float _speed = 5;
+        [SerializeField] ParticleSystem _hit1PRefab;
+        [SerializeField] ParticleSystem _hit2PRefab;
 
         private Animator _animator;
         private Vector3 _direction;
@@ -19,6 +24,7 @@ namespace Gameplay
         {
             //_rope.Build();
             _animator = GetComponent<Animator>();
+            _trigger.OnTriggerEnter2DAsObservable().Subscribe(OnCatchObject).AddTo(this);
         }
 
         private void FixedUpdate()
@@ -49,6 +55,14 @@ namespace Gameplay
         public void SetMovingAnimation(bool isMoving)
         {
             _animator.SetBool(IsMoving, isMoving);
+        }
+
+        private void OnCatchObject(Collider2D obj)
+        {
+            var fx = LeanPool.Spawn(_hit1PRefab);
+            fx.transform.position = obj.transform.position;
+            fx.Play();
+            LeanPool.Despawn(obj);
         }
     }
 }
