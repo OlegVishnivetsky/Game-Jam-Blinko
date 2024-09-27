@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Gameplay
 {
@@ -21,16 +22,23 @@ namespace Gameplay
         [SerializeField] private Rigidbody2D _rightLegRigidbody;
 
         private Animator _animator;
+        private FallingCharacterCollisionHandler _collisionHandler;
         private MoveDirection _moveDirection = MoveDirection.Right;
+
         private bool _isJumped;
+        private bool _isMoving;
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _collisionHandler = GetComponent<FallingCharacterCollisionHandler>();
         }
 
         public void Update()
         {
+            if (!_isMoving)
+                return;
+
             if (_moveDirection == MoveDirection.Left)
             {
                 StartCoroutine(MoveLeftRoutine());
@@ -44,6 +52,7 @@ namespace Gameplay
         public void Initialize(MoveDirection moveDirection)
         {
             _moveDirection = moveDirection;
+            _isMoving = true;
 
             if (_moveDirection == MoveDirection.Left)
             {
@@ -60,7 +69,12 @@ namespace Gameplay
             if (_isJumped)
                 return;
 
+            _animator.Play("FallingCharacter_Idle");
+
+            _isMoving = false;
             _isJumped = true;
+
+            _collisionHandler.Toggle(false);
 
             float randomUpForce = Random.Range(_jumpUpForce.x, 
                 _jumpUpForce.y);

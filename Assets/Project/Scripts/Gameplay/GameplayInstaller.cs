@@ -8,6 +8,7 @@ namespace Gameplay
     {
         [SerializeField] GameObject _sceneUIPrefab;
         [SerializeField] private LevelInfo _levelInfo;
+        [SerializeField] private PlayerView _playerView;
 
         private UIRootView _uiRoot;
 
@@ -21,6 +22,16 @@ namespace Gameplay
         {
             Container
                 .BindInstance(_levelInfo)
+                .AsSingle()
+                .NonLazy();
+
+            Container.
+                BindInstance(_playerView)
+                .AsSingle()
+                .NonLazy();
+
+            Container
+                .BindInterfacesAndSelfTo<GameStateHandler>()
                 .AsSingle()
                 .NonLazy();
 

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27724fe7bfc2e654fbdaaf7f8b3d590c, type: 3}
   m_Name: Level Info 1
   m_EditorClassIdentifier: 
-  _minSpawnTime: 1
-  _maxSpawnTime: 4
+  _minSpawnTime: 4
+  _maxSpawnTime: 8

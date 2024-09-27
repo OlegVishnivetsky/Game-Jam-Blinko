@@ -7,7 +7,7 @@ namespace Zenject.SpaceFighter
         readonly Rigidbody _rigidBody;
         readonly MeshRenderer _renderer;
 
-        float _health = 100.0f;
+        float _health = 3f;
 
         public Player(
             Rigidbody rigidBody,

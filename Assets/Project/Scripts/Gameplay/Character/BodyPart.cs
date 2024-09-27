@@ -13,6 +13,8 @@ namespace Gameplay
         private HingeJoint2D _hingeJoint2D;
         private Rigidbody2D _rigidbody2D;
 
+        public bool IsGrounded;
+
         public Rigidbody2D Rigidbody => _rigidbody2D;
 
         private void Awake()
